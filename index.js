@@ -1,4 +1,5 @@
-const {Builder, By} = require('selenium-webdriver');
+const {Capabilities, Builder, By} = require('selenium-webdriver');
+require('chromedriver');
 
 const scrapeBooks = async (driver, highlightsUrl) => {
   await driver.get(highlightsUrl);
@@ -37,7 +38,14 @@ const scrapeHighlightsForBook = async (driver, book) => {
 };
 
 const scrapeHighlights = async (highlightsUrl) => {
-  const driver = await new Builder().forBrowser('safari').build();
+  const chromeCapabilities = Capabilities.chrome();
+  chromeCapabilities.set('chromeOptions', {args: ['--headless']});
+
+  const driver = await new Builder()
+    .forBrowser('chrome')
+    .withCapabilities(chromeCapabilities)
+    .build();
+
   try {
     const books = await scrapeBooks(driver, highlightsUrl);
     // Note: We do this with a for loop rather than e.g. a map() because

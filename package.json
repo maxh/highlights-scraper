@@ -1,6 +1,6 @@
 {
   "name": "highlights-scraper",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Scrapes public Kindle highlights on Goodreads.",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "Max Heinritz",
   "license": "ISC",
   "dependencies": {
+    "chromedriver": "^2.37.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
