@@ -3,8 +3,10 @@
 Scrape Kindle highlights from public Goodreads pages.
 
 ## Usage
-Find your URL by logging into Goodreads and clicking "Kindle Notes & Highlights"
-under "YOUR READING ACTIVITY" in the left panel.
+Find your Kindle highlights URL by logging into Goodreads and clicking
+"Kindle Notes & Highlights" under "YOUR READING ACTIVITY" in the left panel.
+Load the URL in an incognito window to ensure the highlights to expect
+to be public actually are.
 
 ```js
 import {scrapeHighlights} from "highlights-scraper";
