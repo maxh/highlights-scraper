@@ -3,20 +3,28 @@
 Scrape Kindle highlights from public Goodreads pages.
 
 ## Usage
-Find your Kindle highlights URL by logging into Goodreads and clicking
-"Kindle Notes & Highlights" under "YOUR READING ACTIVITY" in the left panel.
-Load the URL in an incognito window to ensure the highlights you expect
-to be public actually are.
-
 ```js
 const {scrapeHighlights} = require("highlights-scraper");
 
-const URL = "https://www.goodreads.com/notes/69252350-max-heinritz";
-scrapeHighlights(URL).then(highlights => console.log(highlights));
+const url = "https://www.goodreads.com/notes/69252350-max-heinritz";
+scrapeHighlights(url).then(
+  highlights => console.log(highlights),
+  error => console.error(error)
+);
 ```
 
-(You can toggle your individual highlights to be public or not in the web UI for
-a given book.)
+- Find your Kindle highlights URL by logging into Goodreads and clicking
+"Kindle Notes & Highlights" under "YOUR READING ACTIVITY" in the left panel.
+- Load the URL in an incognito window to ensure the highlights you expect
+to be public actually are.
+- You can toggle your individual highlights to be public or not in the web UI for
+a given book.
+
+### Command-line interface
+
+```
+npm run scrape -- https://www.goodreads.com/notes/69252350-max-heinritz
+```
 
 ## Result format
 

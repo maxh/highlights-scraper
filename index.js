@@ -46,8 +46,6 @@ const scrapeHighlights = async (highlightsUrl) => {
       books[i].highlights = await scrapeHighlightsForBook(driver, books[i]);
     }
     return books;
-  } catch(e) {
-    console.error(e);
   } finally {
     await driver.quit();
   }

@@ -1,10 +1,14 @@
 {
   "name": "highlights-scraper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Scrapes public Kindle highlights on Goodreads.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "scrape": "node cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxh/highlights-scraper"
   },
   "author": "Max Heinritz",
   "license": "ISC",
