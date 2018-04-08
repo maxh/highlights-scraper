@@ -1,6 +1,12 @@
-# Highlights Scraper
+# Highlights Scraper [![npm version](https://badge.fury.io/js/highlights-scraper.svg)](https://badge.fury.io/js/highlights-scraper)
 
 Scrape Kindle highlights from public Goodreads pages.
+
+## Installation
+
+```
+npm install --save highlights-scraper
+```
 
 ## Usage
 ```js
