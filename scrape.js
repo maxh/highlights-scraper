@@ -1,4 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By} = require('selenium-webdriver');
 
 const scrapeBooks = async (driver, highlightsUrl) => {
   await driver.get(highlightsUrl);
