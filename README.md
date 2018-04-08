@@ -9,7 +9,7 @@ Load the URL in an incognito window to ensure the highlights you expect
 to be public actually are.
 
 ```js
-import {scrapeHighlights} from "highlights-scraper";
+const {scrapeHighlights} = require("highlights-scraper");
 
 const URL = "https://www.goodreads.com/notes/69252350-max-heinritz";
 scrapeHighlights(URL).then(highlights => console.log(highlights));
