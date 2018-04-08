@@ -1,7 +1,7 @@
 {
   "name": "highlights-scraper",
   "version": "0.0.1",
-  "description": "Scrape public highlights from Goodreads.",
+  "description": "Scrapes public Kindle highlights on Goodreads.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
