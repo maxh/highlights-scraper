@@ -1,61 +1,55 @@
-const {Capabilities, Builder, By} = require('selenium-webdriver');
-require('chromedriver');
+const { Chromeless } = require("chromeless");
 
-const scrapeBooks = async (driver, highlightsUrl) => {
-  await driver.get(highlightsUrl);
-  const bookEls = await driver.findElements(By.css('.annotatedBookItem'));
-  const books = await Promise.all(bookEls.map(async (bookEl) => {
-    const linkEl = await bookEl.findElement(
-      By.css(".annotatedBookItem__knhLink")
-    );
-    const link = await linkEl.getAttribute("href");
-
-    const titleEl = await bookEl.findElement(
-      By.css(".annotatedBookItem__bookInfo__bookTitle")
-    );
-    const title = await titleEl.getText();
-
-    const authorEl = await bookEl.findElement(
-      By.css(".annotatedBookItem__bookInfo__bookAuthor span:last-child"),
-    );
-    const author = await authorEl.getText();
-
-    return {link, title, author};
-  }));
-  return books;
+const scrapeBooks = async (chromeless, highlightsUrl) => {
+  return chromeless
+    .goto(highlightsUrl)
+    .wait(".annotatedBookItem")
+    .evaluate(() => {
+      const bookEls = [].slice.call(document.querySelectorAll(".annotatedBookItem"));
+      const books = bookEls.map(bookEl => {
+        const linkEl = bookEl.querySelector(".annotatedBookItem__knhLink");
+        const titleEl = bookEl.querySelector(".annotatedBookItem__bookInfo__bookTitle");
+        const authorEl = bookEl.querySelector(".annotatedBookItem__bookInfo__bookAuthor span:last-child");
+        return {
+          link: linkEl.getAttribute("href"),
+          title: titleEl.textContent,
+          author: authorEl.textContent,
+        };
+      });
+      return books;
+    });
 };
 
 // book is {link, title, author}
-const scrapeHighlightsForBook = async (driver, book) => {
-  await driver.get(book.link);
-  const els = await driver.findElements(
-    By.css(".noteHighlightTextContainer__highlightContainer .highlightText")
-  );
-  const highlights = await Promise.all(els.map(async (el) => {
-    return await el.findElement(By.css("span")).getText();
-  }));
-  return highlights;
+const scrapeHighlightsForBook = async (chromeless, book) => {
+  return chromeless
+    .goto(book.link)
+    .wait(".noteHighlightTextContainer__highlightContainer")
+    .evaluate(() => {
+      const cls = ".noteHighlightTextContainer__highlightContainer .highlightText span";
+      const highlightEls = [].slice.call(document.querySelectorAll(cls));
+      const highlights = highlightEls.map(highlightEl => {
+        return highlightEl.textContent;
+      });
+      return highlights;
+    });
 };
 
 const scrapeHighlights = async (highlightsUrl) => {
-  const chromeCapabilities = Capabilities.chrome();
-  chromeCapabilities.set('chromeOptions', {args: ['--headless']});
-
-  const driver = await new Builder()
-    .forBrowser('chrome')
-    .withCapabilities(chromeCapabilities)
-    .build();
-
+  const chromeless = new Chromeless({
+    launchChrome: false,
+    remote: false,
+  });
   try {
-    const books = await scrapeBooks(driver, highlightsUrl);
+    const books = await scrapeBooks(chromeless, highlightsUrl);
     // Note: We do this with a for loop rather than e.g. a map() because
     // webdriver must load each page serially.
     for (let i = 0; i < books.length; i++) {
-      books[i].highlights = await scrapeHighlightsForBook(driver, books[i]);
+      books[i].highlights = await scrapeHighlightsForBook(chromeless, books[i]);
     }
     return books;
   } finally {
-    await driver.quit();
+    chromeless.end();
   }
 }
 
