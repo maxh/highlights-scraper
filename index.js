@@ -35,11 +35,11 @@ const scrapeHighlightsForBook = async (chromeless, book) => {
     });
 };
 
-const scrapeHighlights = async (highlightsUrl) => {
-  const chromeless = new Chromeless({
-    launchChrome: false,
-    remote: false,
-  });
+const scrapeHighlights = async (
+  highlightsUrl,
+  chromelessOptions = {remote: false},
+) => {
+  const chromeless = new Chromeless(chromelessOptions);
   try {
     const books = await scrapeBooks(chromeless, highlightsUrl);
     // Note: We do this with a for loop rather than e.g. a map() because
