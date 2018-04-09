@@ -1,6 +1,6 @@
 {
   "name": "highlights-scraper",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Scrapes public Kindle highlights on Goodreads.",
   "main": "index.js",
   "scripts": {

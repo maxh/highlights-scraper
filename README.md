@@ -1,6 +1,6 @@
 # Highlights Scraper [![npm version](https://badge.fury.io/js/highlights-scraper.svg)](https://badge.fury.io/js/highlights-scraper)
 
-Scrape Kindle highlights from public Goodreads pages.
+Scrape Kindle highlights from public Goodreads pages ([example](https://www.goodreads.com/notes/69252350-max-heinritz)).
 
 ## Installation
 
@@ -20,7 +20,7 @@ scrapeHighlights(url).then(
 ```
 
 - Find your Kindle highlights URL by logging into Goodreads and clicking
-"Kindle Notes & Highlights" under "YOUR READING ACTIVITY" in the left panel.
+"Kindle Notes & Highlights" under "Your Reading Activity" in the left panel.
 - Load the URL in an incognito window to ensure the highlights you expect
 to be public actually are.
 - You can toggle your individual highlights to be public or not in the web UI for
