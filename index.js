@@ -40,6 +40,12 @@ const scrapeHighlights = async (
   chromelessOptions = {remote: false},
 ) => {
   const chromeless = new Chromeless(chromelessOptions);
+
+  // Note: Mobile pages are simpler and load more reliably.
+  await chromeless
+    .setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B137 Safari/601.1')
+    .setViewport({width: 414, height: 736, scale: 1});
+
   try {
     const books = await scrapeBooks(chromeless, highlightsUrl);
     // Note: We do this with a for loop rather than e.g. a map() because
