@@ -7,6 +7,6 @@ if (!url) {
 }
 
 scrapeHighlights(url).then(
-  highlights => console.log(highlights),
+  highlights => console.log(JSON.stringify(highlights)),
   error => console.error(error)
 );
