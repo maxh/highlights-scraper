@@ -6,6 +6,9 @@
   "scripts": {
     "scrape": "node cli.js"
   },
+  "bin": {
+    "scrape-highlights": "./cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/maxh/highlights-scraper"

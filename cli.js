@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const {scrapeHighlights} = require("./index.js");
 
 const url = process.argv[2].replace(/^"(.*)"$/, '$1');

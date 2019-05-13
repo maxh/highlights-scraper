@@ -29,7 +29,7 @@ a given book.
 ### Command-line interface
 
 ```
-npm run scrape -- https://www.goodreads.com/notes/69252350-max-heinritz
+scrape-highlights https://www.goodreads.com/notes/69252350-max-heinritz > highlights.json
 ```
 
 ## Result format
